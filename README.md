@@ -1,2 +1,2 @@
 # Ripple-IP-Traffic
-A dashboard that analyses traffic (Ripple.co
+A dashboard that analyses site traffic (Ripple Interview)
