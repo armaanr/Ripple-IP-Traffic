@@ -4,8 +4,8 @@ logs
 npm-debug.log*
 
 .iws
-workspace.xml
-tasks.xml
+**/.idea/workspace.xml
+**/.idea/tasks.xml
 
 # Runtime data
 pids
