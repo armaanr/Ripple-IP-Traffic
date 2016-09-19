@@ -7,49 +7,33 @@ var connectionString = {
     database: 'd3etic8hcd3h7c',
     host: 'ec2-50-17-209-1.compute-1.amazonaws.com',
     port: '5432',
-    max: 19,
-    idleTimeoutMillis: 2000,
     ssl: true
 };
 
-//var client = new pg.Client(connectionString);
-console.log(connectionString);
+pg.connect(connectionString, function(err, client) {
+    if (err) throw err;
+    console.log('Connected to postgres! Getting schemas...');
 
-var LineByLineReader = require('line-by-line'),
-    lr = new LineByLineReader('../../logs.txt');
+    var LineByLineReader = require('line-by-line'),
+        lr = new LineByLineReader('../../logs.txt');
 
-lr.on('error', function (err) {
-    console.error(err);
-    // 'err' contains error object
-});
-
-lr.on('line', function (line) {
-    // pause emitting of lines...
-    lr.pause();
-
-    var tokens = line.split(" ");
-
-    var date = tokens[0];
-    var time = tokens[1].substr(0,15);
-    var timeStamp = date + " " + time;
-    var ip = tokens[6].substr(5,12);
-
-    console.log(timeStamp + " ip address => "+ ip);
-    /*client.connect();
-
-    var query = client.query("INSERT into ripple values (TIMESTAMP '"+timeStamp+"','"+ip+"');");
-
-    query.on('row', function(row) {
-        console.log(row);
+    lr.on('error', function (err) {
+        console.error(err);
+        // 'err' contains error object
     });
 
-    query.on('end', function() {
-        client.end();
-    });*/
+    lr.on('line', function (line) {
+        // pause emitting of lines...
+        lr.pause();
 
-    pg.connect(connectionString, function(err, client) {
-        if (err) throw err;
-        console.log('Connected to postgres! Getting schemas...');
+        var tokens = line.split(" ");
+
+        var date = tokens[0];
+        var time = tokens[1].substr(0,15);
+        var timeStamp = date + " " + time;
+        var ip = tokens[6].substr(5,13);
+
+        console.log(timeStamp + " ip address => "+ ip);
 
         var query = client.query("INSERT into ripple values (TIMESTAMP '"+timeStamp+"','"+ip+"');");
 
@@ -57,18 +41,20 @@ lr.on('line', function (line) {
             console.log(row);
         });
 
+        // ...do your asynchronous line processing..
+        setTimeout(function () {
 
+            // ...and continue emitting lines.
+            lr.resume();
+        }, 1000);
     });
 
+    lr.on('end', function () {
+        // All lines are read, file is closed now.
+    });
 
-    // ...do your asynchronous line processing..
-    setTimeout(function () {
-
-        // ...and continue emitting lines.
-        lr.resume();
-    }, 2000);
 });
 
-lr.on('end', function () {
-    // All lines are read, file is closed now.
-});
+//var client = new pg.Client(connectionString);
+console.log(connectionString);
+

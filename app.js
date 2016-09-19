@@ -5,6 +5,15 @@ var app = express();
 // process.env.PORT lets the port be set by Heroku
 var port = process.env.PORT || 8080;
 
+var connectionString = {
+    user: 'zziybtldxgdpqt',
+    password: '1alMVnpHdShvbCMgbn9AGJNxND',
+    database: 'd3etic8hcd3h7c',
+    host: 'ec2-50-17-209-1.compute-1.amazonaws.com',
+    port: '5432',
+    ssl: true
+};
+
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
@@ -26,18 +35,17 @@ app.listen(port, function() {
 var pg = require('pg');
 pg.defaults.ssl = true;
 
-app.get('/db', function (request, response) {
-    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-        client.query('SELECT * FROM test_table', function(err, result) {
-            done();
-            if (err)
-            { console.error(err); response.send("Error " + err); }
-            else
-            { response.render('pages/db', {results: result.rows} ); }
-        });
-    });
-});
+pg.connect(connectionString, function(err, client) {
+    if (err) throw err;
+    console.log('Connected to postgres! Getting schemas...');
 
+    var query = client.query("SELECT ip from ripple");
+
+    query.on('row', function(row) {
+        console.log(row);
+    });
+
+});
 
 
 
