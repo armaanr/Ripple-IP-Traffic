@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="02f7ad06-f8e1-4cb9-a22a-ad72776cdd50" name="Default" comment="prepping for deployment">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/index.ejs" afterPath="$PROJECT_DIR$/views/index.ejs" />
     </list>
     <ignored path="Ripple-IP-Traffic.iws" />
@@ -46,7 +47,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.ejs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/index.ejs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
@@ -56,11 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="40" column="13" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
+            <state relative-caret-position="630">
+              <caret line="42" column="3" selection-start-line="42" selection-start-column="3" selection-end-line="42" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -98,8 +99,8 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/fillData.js" />
         <option value="$PROJECT_DIR$/public/js/getIps.js" />
-        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/views/index.ejs" />
+        <option value="$PROJECT_DIR$/app.js" />
       </list>
     </option>
   </component>
@@ -293,7 +294,7 @@
       <updated>1473962626625</updated>
       <workItem from="1473962627718" duration="4501000" />
       <workItem from="1474000645041" duration="3584000" />
-      <workItem from="1474122531987" duration="21024000" />
+      <workItem from="1474122531987" duration="21305000" />
     </task>
     <task id="LOCAL-00001" summary="prepping for deployment">
       <created>1473965412785</created>
@@ -306,7 +307,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29109000" />
+    <option name="totallyTimeSpent" value="29390000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -439,14 +440,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="40" column="13" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/getIps.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -459,6 +452,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="96" selection-start-line="8" selection-start-column="96" selection-end-line="8" selection-end-column="96" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" column="3" selection-start-line="42" selection-start-column="3" selection-end-line="42" selection-end-column="3" />
           <folding />
         </state>
       </provider>

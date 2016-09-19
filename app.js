@@ -24,7 +24,7 @@ pg.connect(connectionString, function(err, client) {
     var query = client.query("SELECT ip from ripple;");
 
     query.on('row', function(row) {
-        console.log(row);
+        ips.push(row);
     });
 
 });
@@ -39,7 +39,7 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', function(req, res) {
 
     // ejs render automatically looks in the views folder
-    res.render('index');
+    res.render('index',{'ips':ips});
 });
 
 app.listen(port, function() {
