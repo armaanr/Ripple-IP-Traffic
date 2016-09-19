@@ -4,7 +4,7 @@ pg.defaults.ssl = true;
 
 var ips = [];
 
-console.log("asdasd");
+console.log("asdasdsadds");
 
 var connectionString = {
     user: 'zziybtldxgdpqt',
