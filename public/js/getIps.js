@@ -4,6 +4,8 @@ pg.defaults.ssl = true;
 
 var ips = [];
 
+console.log("asdasd");
+
 pg.connect(connectionString, function(err, client) {
     if (err) throw err;
     console.log('Connected to postgres! Getting schemas...');
