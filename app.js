@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var pg = require('pg');
 
 // set the port of our application
 // process.env.PORT lets the port be set by Heroku
@@ -13,6 +14,20 @@ var connectionString = {
     port: '5432',
     ssl: true
 };
+
+var ips = [];
+
+pg.connect(connectionString, function(err, client) {
+    if (err) throw err;
+    console.log('Connected to postgres! Getting schemas...');
+
+    var query = client.query("SELECT ip from ripple;");
+
+    query.on('row', function(row) {
+        console.log(row);
+    });
+
+});
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
