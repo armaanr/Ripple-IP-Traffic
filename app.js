@@ -24,7 +24,7 @@ pg.connect(connectionString, function(err, client) {
     var query = client.query("SELECT ip from ripple;");
 
     query.on('row', function(row) {
-        ips.push(row);
+        console.log(row);
     });
 
 });
