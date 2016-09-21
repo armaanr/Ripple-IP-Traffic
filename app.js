@@ -4,7 +4,7 @@ var pg = require('pg');
 
 // set the port of our application
 // process.env.PORT lets the port be set by Heroku
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 8082;
 
 var connectionString = {
     user: 'zziybtldxgdpqt',
@@ -18,33 +18,46 @@ var connectionString = {
 var ips = [];
 
 pg.connect(connectionString, function(err, client) {
-    if (err) throw err;
+
+    if (err)
+        throw err;
+
     console.log('Connected to postgres! Getting schemas...');
 
     var query = client.query("SELECT ip from ripple;");
 
     query.on('row', function(row) {
-        console.log(row);
+        if(ips.indexOf(row.ip) == -1){
+            ips.push(row.ip);
+        }
+    });
+
+    query.on('end', function(row){
+
+        // set the view engine to ejs
+        app.set('view engine', 'ejs');
+
+        // make express look in the public directory for assets (public/js/img)
+        app.use(express.static(__dirname + '/public'));
+
+        // set the home page route
+        app.get('/', function(req, res) {
+
+            // ejs render automatically looks in the views folder
+            res.render('index',{'ips':ips});
+        });
+
+        app.listen(port, function() {
+            console.log('Our app is running on http://localhost:' + port);
+        });
+
     });
 
 });
 
-// set the view engine to ejs
-app.set('view engine', 'ejs');
 
-// make express look in the public directory for assets (public/js/img)
-app.use(express.static(__dirname + '/public'));
 
-// set the home page route
-app.get('/', function(req, res) {
 
-    // ejs render automatically looks in the views folder
-    res.render('index',{'ips':ips});
-});
-
-app.listen(port, function() {
-    console.log('Our app is running on http://localhost:' + port);
-});
 
 
 
