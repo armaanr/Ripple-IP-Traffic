@@ -2,19 +2,17 @@ var ipButtons = document.getElementsByTagName('li');
 
 window.onload = function () {
 
-    console.log(ipButtons[0].getAttribute('name'));
-
     for (var i = 0; i < ipButtons.length; i++) {
         ipButtons[i].addEventListener('click', getData, false);
     }
 }
 
-
+//sends get request to server for 'requests' data
 function getData(){
 
     var dataRequest = new XMLHttpRequest();
     var ip = this.getAttribute('name');
-    var url = "http://localhost:8080/data?ip="+ip+"";
+    var url = "https://fast-coast-94108.herokuapp.com/data?ip="+ip+"";
 
     dataRequest.onreadystatechange = function() {
         var status = dataRequest.status;
@@ -31,9 +29,8 @@ function getData(){
     dataRequest.send();
 }
 
+//generates a highcharts graph using input data
 function graphGenerator(data) {
-
-    console.log(data);
 
     $('#graph').highcharts({
         chart: {
@@ -43,17 +40,10 @@ function graphGenerator(data) {
             text: 'Requests per second'
         },
         subtitle: {
-            text: document.ontouchstart === undefined ?
-                'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+            text: 'Click and drag area to zoom'
         },
         xAxis: {
-            type: 'datetime',
-            dateTimeLabelFormats: {
-                second: '%H:%M:%S',
-                minute: '%H:%M',
-                hour: '%H:%M',
-                day: '%e. %b'
-            }
+            type: 'datetime'
         },
         yAxis: {
             title: {
@@ -89,7 +79,6 @@ function graphGenerator(data) {
                 threshold: null
             }
         },
-
         series: [{
             type: 'area',
             name: 'Requests per second',

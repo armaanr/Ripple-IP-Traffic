@@ -4,7 +4,6 @@ var app = express();
 var pg = require('pg');
 
 // set the port of our application
-// process.env.PORT lets the port be set by Heroku
 var port = process.env.PORT || 8080;
 
 var connectionString = {
@@ -13,7 +12,7 @@ var connectionString = {
     database: 'd3etic8hcd3h7c',
     host: 'ec2-50-17-209-1.compute-1.amazonaws.com',
     port: '5432',
-    timeout: 10000,
+    timeout: 2000,
     ssl: true
 };
 
@@ -25,18 +24,19 @@ app.use(express.static(__dirname + '/public'));
 
 // set the home page route
 app.get('/', function(req, res) {
+
     // ejs render automatically looks in the views folder
     res.render('index',{'ips':ips});
+
 });
 
 var ips = [];
 
-pg.connect(connectionString, function(err, client) {
+//deploy the website
+pg.connect(connectionString, function(err, client, done) {
 
     if (err)
         throw err;
-
-    console.log('Connected to postgres! Getting schemas...');
 
     var query = client.query("SELECT ip from ripple;");
 
@@ -56,23 +56,19 @@ pg.connect(connectionString, function(err, client) {
 
 });
 
+//sends requests per data information back to client
 app.get('/data', function(req, res) {
 
-    console.log("connected to other get");
     var searchIp = req.param('ip');
-    console.log("new ip =>"+ searchIp);
-
     var reqPerSec = {};
 
-    pg.connect(connectionString, function(err, client) {
+    pg.connect(connectionString, function(err, client, done) {
 
         console.log('Connected to postgres! Getting schemas...');
 
         var query = client.query("SELECT * from ripple where ip = inet '"+searchIp+"';");
 
         query.on('row', function(row) {
-
-
 
             if(row['timestamp'] in reqPerSec){
                 var temp = reqPerSec[row['timestamp']];
@@ -89,19 +85,20 @@ app.get('/data', function(req, res) {
             var newIps = [];
 
             Object.keys(reqPerSec).forEach(function (element, index) {
-                var curr = [element, reqPerSec[element]];
+                var myDate = new Date(element);
+                var timeInMillis = myDate.getTime();
+                var curr = [timeInMillis, reqPerSec[element]];
                 newIps.push(curr);
             });
 
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
 
-            res.send(JSON.stringify(newIps.reverse()));
+            res.send(JSON.stringify(newIps.sort()));
+            done();
         });
 
     });
-
-    // ejs render automatically looks in the views folder
 
 });
 

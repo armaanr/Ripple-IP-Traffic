@@ -2,10 +2,6 @@ body{
     overflow-x: hidden;
 }
 
-li:hover{
-    background-color: lavender;
-}
-
 .dropdown{
     margin-top: 5%;
     left: 40%;
@@ -18,8 +14,12 @@ li:hover{
 
 .dropdown-menu{
     padding-left: 5%;
-    padding-right: 6%;
+    padding-right: 5%;
     text-align: center;
+}
+
+li:hover{
+    background-color: lavender;
 }
 
 #graph{

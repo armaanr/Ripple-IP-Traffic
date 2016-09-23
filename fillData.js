@@ -12,8 +12,8 @@ var connectionString = {
 
 pg.connect(connectionString, function(err, client) {
     if (err) throw err;
-    console.log('Connected to postgres! Getting schemas...');
 
+    //iterates through a file line by line
     var LineByLineReader = require('line-by-line'),
         lr = new LineByLineReader('../../logs.txt');
 
@@ -31,7 +31,7 @@ pg.connect(connectionString, function(err, client) {
         var date = tokens[0];
         var time = tokens[1].substr(0,15);
         var timeStamp = date + " " + time;
-        var ip = tokens[6].substr(5,13);
+        var ip = tokens[6].substring(5).slice(0,-1);
 
         console.log(timeStamp + " ip address => "+ ip);
 
@@ -50,11 +50,8 @@ pg.connect(connectionString, function(err, client) {
     });
 
     lr.on('end', function () {
-        // All lines are read, file is closed now.
+        console.log("File read completed");
     });
 
 });
-
-//var client = new pg.Client(connectionString);
-console.log(connectionString);
 
