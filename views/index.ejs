@@ -7,28 +7,27 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-    <script type="text/javascript" src="../public/js/graph.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script type="text/javascript" src="/js/graph.js"></script>
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div class = "container">
     <div class = "header">
-        <h1>Ripple IP Traffic</h1>
+        <h1 class="text-center">Ripple IP Traffic</h1>
     </div>
     <div id ="dashboard">
         <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown">IP List
+            <button id="ipList" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">IP List
                 <span class="caret"></span></button>
             <ul class="dropdown-menu">
                 <% for(var i=0; i<ips.length; i++) {%>
-                <li><a href="#"><%= ips[i] %></a></li>
+                <li name="<%=ips[i]%>"><%= ips[i] %></li>
                 <% } %>
             </ul>
         </div>
         <div id ="graph">
-
         </div>
-
     </div>
 </div>
 </body>

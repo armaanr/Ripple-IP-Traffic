@@ -1,0 +1,28 @@
+body{
+    overflow-x: hidden;
+}
+
+li:hover{
+    background-color: lavender;
+}
+
+.dropdown{
+    margin-top: 5%;
+    left: 40%;
+    right: auto;
+}
+
+.dropdown > button{
+    padding: 2% 7%;
+}
+
+.dropdown-menu{
+    padding-left: 5%;
+    padding-right: 6%;
+    text-align: center;
+}
+
+#graph{
+    margin-top: 5%;
+}
+
