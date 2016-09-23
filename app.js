@@ -49,7 +49,6 @@ pg.connect(connectionString, function(err, client, done) {
     query.on('end', function(row){
 
         app.listen(port, function() {
-            console.log('Our app is running on http://localhost:' + port);
         });
 
     });
@@ -81,6 +80,8 @@ app.get('/data', function(req, res) {
         });
 
         query.on('end', function(){
+
+            //converts reqPerSec object into an array. Required for using highcharts api.
 
             var newIps = [];
 

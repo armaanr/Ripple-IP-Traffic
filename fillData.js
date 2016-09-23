@@ -10,6 +10,7 @@ var connectionString = {
     ssl: true
 };
 
+//Inserts data into database
 pg.connect(connectionString, function(err, client) {
     if (err) throw err;
 
@@ -19,11 +20,10 @@ pg.connect(connectionString, function(err, client) {
 
     lr.on('error', function (err) {
         console.error(err);
-        // 'err' contains error object
     });
 
     lr.on('line', function (line) {
-        // pause emitting of lines...
+        // pause emitting of lines
         lr.pause();
 
         var tokens = line.split(" ");
@@ -41,10 +41,9 @@ pg.connect(connectionString, function(err, client) {
             console.log(row);
         });
 
-        // ...do your asynchronous line processing..
         setTimeout(function () {
 
-            // ...and continue emitting lines.
+            //resume line read after timeout
             lr.resume();
         }, 1000);
     });
