@@ -7,11 +7,11 @@ var pg = require('pg');
 var port = process.env.PORT || 8080;
 
 var connectionString = {
-    user: 'zziybtldxgdpqt',
-    password: '1alMVnpHdShvbCMgbn9AGJNxND',
-    database: 'd3etic8hcd3h7c',
-    host: 'ec2-50-17-209-1.compute-1.amazonaws.com',
-    port: '5432',
+    user: ***REMOVED***,
+    password: ***REMOVED***,
+    database: ***REMOVED***,
+    host: ***REMOVED***,
+    port: ***REMOVED***,
     timeout: 2000,
     ssl: true
 };
